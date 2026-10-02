@@ -58,6 +58,8 @@ def test_display_users():
     add_user("koko", "koko@g.c","koko")
     assert display_users() == "Логин: koko, Электронная почта: koko@g.c", "список пользователей"
 
+def test_disdos_nikitos():
+    assert main("3") == "Чтобы выйти из цикла напиши 0 в знаках"
 # Возможные варианты тестов:
 """
 # Тест добавления пользователя с существующим логином.
