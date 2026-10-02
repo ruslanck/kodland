@@ -36,11 +36,33 @@ def test_add_new_user(setup_database, connection):
     user = cursor.fetchone()
     assert user, "Пользователь должен быть добавлен в базу данных."
 
+def test_add_new_user_with_not_new_name(setup_database, connection):
+    add_user("kokp", "koko@gmail.com", "koko")
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM users WHERE username='koko';")
+    user = cursor.fetchone()
+    assert user, "пользователь уже зарегистрирован в базе(с данным логином)"
+
+def test_authenticate_user(username, password):
+    add_user("koko", "koko@g.c","koko")
+    assert authenticate_user("koko", "koko") == True, "пользователь аунтефицирован"
+
+def test_not_authenticate_user(username, password):
+    assert authenticate_user("koko", "koko") == False, "пользователь не аунтефицирован"
+
+def test_not_true_password_authenticate_user(username, password):
+    add_user("koko", "koko@g.c","koko")
+    assert authenticate_user("koko", "kok") == False, "неправильный пароль"
+
+def test_display_users():
+    add_user("koko", "koko@g.c","koko")
+    assert display_users() == "Логин: koko, Электронная почта: koko@g.c", "список пользователей"
+
 # Возможные варианты тестов:
 """
-Тест добавления пользователя с существующим логином.
-Тест успешной аутентификации пользователя.
-Тест аутентификации несуществующего пользователя.
-Тест аутентификации пользователя с неправильным паролем.
-Тест отображения списка пользователей.
+# Тест добавления пользователя с существующим логином.
+# Тест успешной аутентификации пользователя.
+# Тест аутентификации несуществующего пользователя.
+# Тест аутентификации пользователя с неправильным паролем.
+# Тест отображения списка пользователей.
 """

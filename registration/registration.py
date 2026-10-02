@@ -38,6 +38,7 @@ def display_users():
             print(f"Логин: {user[0]}, Электронная почта: {user[1]}")
 
 
+
 def user_choice():
     print("\n1. Авторизоваться")
     print("2. Зарегистрироваться")
